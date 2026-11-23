@@ -1,0 +1,23 @@
+name: midterm_mobile_app
+description: A bilingual electronics catalogue for the Flutter midterm.
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  easy_localization: ^3.0.8
+  introduction_screen: ^5.0.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  shared_preferences: ^2.5.6
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/translations/
+
