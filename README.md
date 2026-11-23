@@ -77,7 +77,3 @@ SplashPage يستخدم initState وFuture.delayed للانتظار 2.5 ثاني
 flutter analyze
 flutter test
 ```
-
-## المحاضرات
-
-مفاهيم المحاضرات 1–12، إضافة إلى المحاضرة 19 لشاشة البداية وIntroductionScreen. لا توجد حزمة لإدارة الحالة. الحزم الرئيسية: easy_localization وintroduction_screen. shared_preferences اعتماد اختبار مباشر لاستخدام إعدادات وهمية أثناء الاختبار؛ حفظ اللغة في التطبيق تديره easy_localization.
