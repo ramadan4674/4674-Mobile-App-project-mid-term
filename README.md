@@ -1,77 +1,51 @@
-# متجر التقنية — مشروع الميدترم
+# متجر التقنية — النسخة المبسطة
 
-تطبيق Flutter تعليمي، بالإنجليزية والعربية، لعرض أجهزة إلكترونية وصورها وأسعارها التوضيحية. جميع صور التطبيق محلية.
+تطبيق تعليمي بواجهات وتنقّل فقط، دون تسجيل حسابات حقيقية أو قاعدة بيانات.
 
 ## التشغيل
-
-افتح هذا المجلد نفسه في VS Code، ثم افتح Terminal ونفّذ:
 
 ```text
 flutter pub get
 flutter run
 ```
 
-اختر المحاكي أو الهاتف من أسفل VS Code قبل الضغط على F5. للتشغيل على Chrome:
+## الملفات التي تراجعها
 
-```text
-flutter run -d chrome
-```
+1. lib/main.dart: تشغيل التطبيق، الترجمة وحالة الثيم.
+2. lib/pages/splash_page.dart: الشعار ثم الانتقال بعد 2.5 ثانية.
+3. lib/pages/onboarding_page.dart: ثلاث صفحات تعريفية، التالي والتخطي والانتهاء.
+4. lib/pages/login_page.dart: واجهة الدخول وفتح الرئيسية أو التسجيل.
+5. lib/pages/sign_up_page.dart: واجهة إنشاء حساب والرجوع للدخول.
+6. lib/pages/home_page.dart: قائمة بسيطة تعرض صور المنتجات وأسماءها وأسعارها.
+7. lib/pages/settings_page.dart: تغيير الثيم واللغة.
+8. lib/widgets/app_text_field.dart: حقل كتابة مشترك.
+9. lib/widgets/app_button.dart: زر مشترك.
+10. lib/theme/app_theme.dart: ألوان وتنسيقات الوضعين.
+11. lib/data/products.dart: بيانات المنتجات الستة.
 
-## مسار التطبيق
+assets/translations/ar.json وen.json للنصوص. assets/images للصور.
+pubspec.yaml لتعريف الحزم والصور والترجمة. test/widget_test.dart للفحص الآلي.
 
-شاشة البداية تعرض الشعار والاسم لمدة 2.5 ثانية. بعدها تظهر ثلاث صفحات تعريفية فيها تخطّي، التالي وابدأ. شاشة الدخول تفتح الرئيسية، وإنشاء الحساب يفتح الرئيسية أيضًا. زر الرجوع يعيدك إلى الصفحة السابقة. الإعدادات وصفحة تفاصيل المنتج تفتحان من الرئيسية.
+## علاقة الملفات
 
-شاشتا البداية والتعريف تستخدمان pushReplacement كما في المحاضرة 19، حتى لا يرجع المستخدم إليهما بزر الرجوع. بقية الصفحات تستخدم Navigator.push وNavigator.pop أو سهم الرجوع التلقائي.
+main → Splash → Onboarding → Login → Home → Settings.
+Login يفتح SignUp، ومنها نفتح Home أو نرجع إلى Login.
+main يمرّر دالة تغيير الثيم عبر الصفحات حتى تصل إلى Settings.
+Home يقرأ قائمة products. Login وSignUp يستعملان الزر والحقل المشتركين.
 
-## ما يعمل
+## أهم ما تفهمه
 
-- العربية والإنجليزية باستخدام easy_localization وملفي JSON.
-- حفظ اختيار اللغة بواسطة الحزمة.
-- اتجاه العرض العربي من اليمين إلى اليسار.
-- تغيير الوضع الفاتح والداكن من الإعدادات. اختيار الوضع محفوظ أثناء تشغيل التطبيق فقط.
-- عرض المنتجات الستة مباشرة في شبكة واحدة.
-- فتح تفاصيل كل منتج: الصورة والاسم والسعر والوصف.
-- إخفاء حقول كلمات المرور والتمرير عند فتح لوحة المفاتيح.
+- import لاستعمال ملف أو مكتبة.
+- Navigator.push لفتح صفحة، pop للرجوع، pushReplacement لاستبدال البداية والتعريف.
+- setState لتحديث الثيم في main.
+- constructors لتمرير دالة تغيير الثيم.
+- context.tr لقراءة النص وcontext.setLocale لتغيير اللغة.
+- ListView وListTile لعرض المنتجات، بدون فلترة أو صفحة تفاصيل.
 
-هذه واجهة تعليمية: لا تُنشئ حسابات حقيقية، ولا ترسل كلمات مرور، ولا تحتوي عمليات شراء أو قاعدة بيانات. زر نسيت كلمة المرور يوضح أن الاستعادة غير مفعلة.
+حافظنا على كل صفحة وكل عنصر مشترك في ملف مستقل حسب ورقة المشروع.
+حُذفت صفحة التفاصيل الاختيارية، فلا تتضمن هذه النسخة ميزة البونص الخاصة بها.
 
-## ترتيب الكود
-
-- lib/main.dart: بدء الترجمة، MaterialApp، وحفظ themeMode بواسطة setState.
-- lib/theme/app_theme.dart: الألوان والحقول والأزرار في الوضعين.
-- lib/pages/: ملف مستقل لكل صفحة.
-- lib/widgets/: AppTextField وAppButton وLanguageButton وProductCard.
-- lib/data/products.dart: بيانات المنتجات الستة، دون جلب بيانات من الإنترنت.
-- assets/translations/: النصوص العربية والإنجليزية؛ المفاتيح متطابقة.
-- assets/images/: الصور والشعار.
-- test/widget_test.dart: اختبار التنقّل والترجمة والثيم والتمرير.
-
-## شرح مختصر للمناقشة
-
-MyApp هو StatefulWidget لأن اختيار الثيم يتغير. دالة changeTheme تستدعي setState لإعادة بناء MaterialApp. تُمرّر الدالة للصفحات عبر constructors حتى تصل إلى SettingsPage؛ لا يوجد Provider.
-
-HomePage هو StatelessWidget ويعرض قائمة المنتجات مباشرة باستخدام GridView.builder.
-
-ProductDetailsPage يستقبل منتجًا عبر constructor ويعرض بياناته. AppTextField وAppButton يطبّقان شكلًا موحّدًا للحقول والأزرار بدل تكرار الكود.
-
-context.tr يقرأ النص حسب اللغة الحالية. context.setLocale يبدّل اللغة، وMaterialApp يستخدم locale وlocalizationsDelegates وsupportedLocales من الحزمة. CrossAxisAlignment.start وAlignmentDirectional يتبعان اتجاه اللغة.
-
-SplashPage يستخدم initState وFuture.delayed للانتظار 2.5 ثانية. فحص mounted يمنع الانتقال إذا أُغلقت الصفحة. OnboardingPage يستخدم IntroductionScreen مع ثلاثة PageViewModel.
-
-## تعديل المحتوى
-
-الاسم والعناوين والوصف: assets/translations/en.json وar.json.
-اللون الأساسي: seedColor في lib/theme/app_theme.dart.
-الأسعار وبيانات المنتجات: lib/data/products.dart.
-الصور: assets/images. بعد إضافة صور جديدة أوقف التطبيق وشغّله من جديد.
-
-## الفحص المنفذ
-
-نجح تحليل Dart واختبارا Flutter للواجهة. شمل الفحص شاشة البداية، Next وDone وSkip، الدخول وإنشاء الحساب، إخفاء كلمات المرور، المنتجات والتفاصيل، تغيير اللغة والوضع الداكن، الرجوع، وشاشة بعرض 320 مع محاكاة لوحة المفاتيح.
-
-تم بناء نسخة الويب وتشغيلها في المتصفح ومراجعة الصور والنصوص واللغة العربية. لم يتم بناء APK أو تشغيل نسخة Android على هاتف فعلي خلال الإعداد.
-
-إعادة الفحص:
+## الفحص
 
 ```text
 flutter analyze

@@ -9,8 +9,6 @@ import 'package:midterm_mobile_app/pages/login_page.dart';
 import 'package:midterm_mobile_app/pages/home_page.dart';
 import 'package:midterm_mobile_app/pages/onboarding_page.dart';
 import 'package:midterm_mobile_app/pages/sign_up_page.dart';
-import 'package:midterm_mobile_app/pages/product_details_page.dart';
-import 'package:midterm_mobile_app/widgets/product_card.dart';
 
 class TestTranslations extends AssetLoader {
   const TestTranslations();
@@ -69,14 +67,9 @@ void main() {
     await tester.tap(find.text('Login'));
     await tester.pumpAndSettle();
     expect(find.byType(HomePage), findsOneWidget);
-    expect(find.byType(ProductCard), findsNWidgets(6));
-    expect(find.byType(ChoiceChip), findsNothing);
-    await tester.tap(find.byType(ProductCard).first);
-    await tester.pumpAndSettle();
-    expect(find.byType(ProductDetailsPage), findsOneWidget);
+    expect(find.byType(ListTile), findsNWidgets(6));
     expect(find.text('1850 LYD'), findsOneWidget);
-    await tester.tap(find.byType(BackButton));
-    await tester.pumpAndSettle();
+    expect(find.byType(ChoiceChip), findsNothing);
     await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
     await tester.tap(find.byType(Switch));
