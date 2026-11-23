@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import '../widgets/language_button.dart';
 import 'login_page.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -19,6 +20,7 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
+      appBar: AppBar(actions: const [LanguageButton(), SizedBox(width: 12)]),
       body: SafeArea(
         child: IntroductionScreen(
           globalBackgroundColor: colors.surface,
