@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../data/products.dart';
+import '../pages/product_details_page.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, required this.product, required this.onTap});
-  final Product product;
-  final VoidCallback onTap;
+  const ProductCard({super.key, required this.id, required this.price});
+  final String id;
+  final int price;
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -16,7 +16,14 @@ class ProductCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: onTap,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductDetailsPage(id: id, price: price),
+            ),
+          );
+        },
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Column(
@@ -24,12 +31,15 @@ class ProductCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Center(
-                  child: Image.asset(product.image, fit: BoxFit.contain),
+                  child: Image.asset(
+                    'assets/images/$id.png',
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                context.tr('product_${product.id}'),
+                context.tr('product_$id'),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(
@@ -38,7 +48,7 @@ class ProductCard extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                context.tr('price', namedArgs: {'value': '${product.price}'}),
+                context.tr('price', namedArgs: {'value': '$price'}),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: colors.primary,
                   fontWeight: FontWeight.bold,

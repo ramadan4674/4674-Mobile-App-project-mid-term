@@ -65,7 +65,11 @@ void main() {
       tester.widget<TextField>(find.byType(TextField).last).obscureText,
       isTrue,
     );
-    await tester.ensureVisible(find.text('Login'));
+    await tester.scrollUntilVisible(
+      find.text('Login'),
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
     await tester.tap(find.text('Login'));
     await tester.pumpAndSettle();
     expect(find.byType(HomePage), findsOneWidget);
@@ -116,13 +120,22 @@ void main() {
     tester.view.physicalSize = const Size(320, 640);
     tester.view.viewInsets = const FakeViewPadding(bottom: 280);
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(TextField).last, 'example123');
-    expect(
-      tester.widget<TextField>(find.byType(TextField).last).obscureText,
-      isTrue,
+    final confirmPassword = find.byWidgetPredicate(
+      (widget) =>
+          widget is TextField &&
+          widget.decoration?.labelText == 'Confirm password',
     );
-    await tester.ensureVisible(
+    await tester.scrollUntilVisible(
+      confirmPassword,
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.enterText(confirmPassword, 'example123');
+    expect(tester.widget<TextField>(confirmPassword).obscureText, isTrue);
+    await tester.scrollUntilVisible(
       find.widgetWithText(ElevatedButton, 'Create account'),
+      150,
+      scrollable: find.byType(Scrollable).first,
     );
     await tester.tap(find.widgetWithText(ElevatedButton, 'Create account'));
     await tester.pumpAndSettle();
@@ -130,7 +143,11 @@ void main() {
     expect(tester.takeException(), isNull);
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Login'));
+    await tester.scrollUntilVisible(
+      find.text('Login'),
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
     await tester.tap(find.text('Login'));
     await tester.pumpAndSettle();
     expect(find.byType(LoginPage), findsOneWidget);

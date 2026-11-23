@@ -19,6 +19,16 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final pageDecoration = PageDecoration(
+      pageColor: colors.surface,
+      titleTextStyle: TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: colors.onSurface,
+      ),
+      bodyTextStyle: TextStyle(fontSize: 17, color: colors.onSurfaceVariant),
+    );
+
     return Scaffold(
       appBar: AppBar(actions: const [LanguageButton(), SizedBox(width: 12)]),
       body: SafeArea(
@@ -33,18 +43,7 @@ class OnboardingPage extends StatelessWidget {
                   'assets/images/onboarding_$i.png',
                   height: 260,
                 ),
-                decoration: PageDecoration(
-                  pageColor: colors.surface,
-                  titleTextStyle: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: colors.onSurface,
-                  ),
-                  bodyTextStyle: TextStyle(
-                    fontSize: 17,
-                    color: colors.onSurfaceVariant,
-                  ),
-                ),
+                decoration: pageDecoration,
               ),
           ],
           showSkipButton: true,

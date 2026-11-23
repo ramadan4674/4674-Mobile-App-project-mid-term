@@ -19,89 +19,84 @@ class LoginPage extends StatelessWidget {
         actions: const [LanguageButton(), SizedBox(width: 8)],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: ListView(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 72,
-                  height: 72,
-                ),
+          children: [
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: Image.asset(
+                'assets/images/logo.png',
+                width: 72,
+                height: 72,
               ),
-              const SizedBox(height: 24),
-              Text(
-                context.tr('welcome_back'),
-                style: text.headlineLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                context.tr('login_subtitle'),
-                style: text.bodyLarge?.copyWith(color: colors.onSurfaceVariant),
-              ),
-              const SizedBox(height: 28),
-              AppTextField(
-                label: context.tr('email'),
-                icon: Icons.alternate_email,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                label: context.tr('password'),
-                icon: Icons.lock_outline,
-                isPassword: true,
-              ),
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: TextButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(context.tr('reset_notice'))),
-                    );
-                  },
-                  child: Text(context.tr('forgot_password')),
-                ),
-              ),
-              const SizedBox(height: 24),
-              AppButton(
-                text: context.tr('login'),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              context.tr('welcome_back'),
+              style: text.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              context.tr('login_subtitle'),
+              style: text.bodyLarge?.copyWith(color: colors.onSurfaceVariant),
+            ),
+            const SizedBox(height: 28),
+            AppTextField(
+              label: context.tr('email'),
+              icon: Icons.alternate_email,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: 16),
+            AppTextField(
+              label: context.tr('password'),
+              icon: Icons.lock_outline,
+              isPassword: true,
+            ),
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          HomePage(onThemeChanged: onThemeChanged),
-                    ),
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(context.tr('reset_notice'))),
                   );
                 },
+                child: Text(context.tr('forgot_password')),
               ),
-              const SizedBox(height: 20),
-              Text(context.tr('no_account'), textAlign: TextAlign.center),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          SignUpPage(onThemeChanged: onThemeChanged),
-                    ),
-                  );
-                },
-                child: Text(context.tr('signup')),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                context.tr('demo_notice'),
-                textAlign: TextAlign.center,
-                style: text.bodySmall?.copyWith(color: colors.onSurfaceVariant),
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 24),
+            AppButton(
+              text: context.tr('login'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        HomePage(onThemeChanged: onThemeChanged),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            Text(context.tr('no_account'), textAlign: TextAlign.center),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SignUpPage(onThemeChanged: onThemeChanged),
+                  ),
+                );
+              },
+              child: Text(context.tr('signup')),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              context.tr('demo_notice'),
+              textAlign: TextAlign.center,
+              style: text.bodySmall?.copyWith(color: colors.onSurfaceVariant),
+            ),
+          ],
         ),
       ),
     );
